@@ -1,20 +1,22 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+  kotlin("jvm") version "1.9.21"
 }
 
-group = "io.github.darkflamemasterdev"
+group = "io.github.DarkFlameMasterDev"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
+  testImplementation("org.jetbrains.kotlin:kotlin-test")
+  implementation(project(":MatrixKotlin"))
 }
 
 tasks.test {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(11)
+  jvmToolchain(11)
 }

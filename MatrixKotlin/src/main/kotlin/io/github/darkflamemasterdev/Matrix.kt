@@ -158,21 +158,21 @@ class Matrix(private val row: Int, private val column: Int) {
 
   override fun toString(): String {
     val sb = StringBuilder()
-    sb.append("Matrix = {")
+    sb.append("[")
     for (i in 0..<row) {
-      sb.append("[")
+      sb.append("(")
       for (j in 0..<column) {
         sb.append(values[i][j])
         if (j != column - 1) {
           sb.append(", ")
         }
       }
-      sb.append("]")
+      sb.append(")")
       if (i != row - 1) {
         sb.append(",")
       }
     }
-    sb.append("}")
+    sb.append("]")
     return sb.toString()
   }
 }
