@@ -106,8 +106,6 @@ class Matrix(private val row: Int, private val column: Int) {
       }
     }
 
-    println(augmentedMatrix)
-
     val inverseMatrix = Matrix(row, column)
     val inverseMatrixValues = Array(row) { i ->
       FloatArray(column) { j ->
