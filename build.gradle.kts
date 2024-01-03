@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "1.9.21"
 }
 
-group = "com.czb"
+group = "io.github.darkflamemasterdev"
 version = "1.0-SNAPSHOT"
 
 repositories {
