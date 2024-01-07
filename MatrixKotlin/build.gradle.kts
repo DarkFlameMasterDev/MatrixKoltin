@@ -5,7 +5,7 @@ plugins {
   id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
-group = "io.github.DarkFlameMasterDev"
+group = "io.github.darkflamemasterdev"
 version = "1.1"
 
 mavenPublishing {
@@ -13,7 +13,7 @@ mavenPublishing {
 
   signAllPublications()
 
-  coordinates("io.github.DarkFlameMasterDev", "MatrixKotlin", "1.1T")
+  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1T")
 
   pom {
     name.set("MatrixKotlin")
