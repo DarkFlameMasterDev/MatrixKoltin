@@ -31,11 +31,11 @@ mavenPublishing {
       developer {
         id.set("DarkFlameMasterDev")
         name.set("lucas")
-        url.set("https://github.com/DarkFlameMasterDev")
+        url.set("https://github.com/darkflamemasterdev")
       }
     }
     scm {
-      url.set("https://github.com/drawsthings/MatrixKotlin")
+      url.set("https://github.com/darkflamemasterdev/MatrixKotlin")
       connection.set("scm:git:git://github.com/darkflamemasterdev/MatrixKotlin.git")
       developerConnection.set("scm:git:ssh://git@github.com/darkflamemasterdev/MatrixKotlin.git")
     }
