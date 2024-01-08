@@ -6,14 +6,14 @@ plugins {
 }
 
 group = "io.github.darkflamemasterdev"
-version = "1.1"
+version = "1.1.0"
 
 mavenPublishing {
   publishToMavenCentral(SonatypeHost.S01)
 
   signAllPublications()
 
-  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1T")
+  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1.0")
 
   pom {
     name.set("MatrixKotlin")

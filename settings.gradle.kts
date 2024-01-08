@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "MatrixKotlin-Lib"
 include("MatrixKotlin")
+include("testInMavenCentral")
