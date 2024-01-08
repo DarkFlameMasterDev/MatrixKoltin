@@ -1,8 +1,19 @@
 package io.github.darkflamemasterdev
 
+/**
+ *
+ * @property row Int
+ * @property column Int
+ * @property values Array<FloatArray>
+ * @constructor
+ */
 class Matrix(private val row: Int, private val column: Int) {
   private var values = Array(row) { FloatArray(column) { 0f } }
 
+  /**
+   * Set the value of the matrix
+   * @param value Array<FloatArray>
+   */
   fun setMatrixValue(value: Array<FloatArray>) {
     if (value.size != row || value[0].size != column) {
       throw IllegalArgumentException("Matrix size not match")
@@ -10,6 +21,13 @@ class Matrix(private val row: Int, private val column: Int) {
     this.values = value
   }
 
+  /**
+   * pre multiply the {@param matrix}
+   * 将当前矩阵放在左侧，也就是当前矩阵左乘 {@param matrix}
+   * @param matrix Matrix
+   * The row of matrix should be same as the column of current matrix
+   * @return Matrix
+   */
   fun preMultiply(matrix: Matrix): Matrix {
     if (column != matrix.row) {
       throw IllegalArgumentException("Matrix multiplication not possible")
@@ -27,6 +45,13 @@ class Matrix(private val row: Int, private val column: Int) {
     return product
   }
 
+  /**
+   * Post multiply the {@param matrix}
+   * 将当前矩阵放在右侧，也就是当前矩阵右乘 {@param matrix}
+   * @param matrix Matrix
+   * The column of matrix should be same as the row of current matrix
+   * @return Matrix
+   */
   fun postMultiply(matrix: Matrix): Matrix {
     if (row != matrix.column) {
       throw IllegalArgumentException("Matrix multiplication not possible")
@@ -44,6 +69,12 @@ class Matrix(private val row: Int, private val column: Int) {
     return product
   }
 
+  /**
+   * Plus two matrix
+   * Need to be same row and column
+   * @param other Matrix
+   * @return Matrix
+   */
   operator fun plus(other: Matrix): Matrix {
     if (row != other.row || column != other.column) {
       throw IllegalArgumentException("Matrix addition not possible")
@@ -57,6 +88,12 @@ class Matrix(private val row: Int, private val column: Int) {
     return sum
   }
 
+  /**
+   * Minus two matrix
+   * @param other Matrix
+   * Should be same row and column
+   * @return Matrix
+   */
   operator fun minus(other: Matrix): Matrix {
     if (row != other.row || column != other.column) {
       throw IllegalArgumentException("Matrix subtraction not possible")
@@ -70,11 +107,22 @@ class Matrix(private val row: Int, private val column: Int) {
     return difference
   }
 
+  /**
+   * Times two matrix
+   * Same as preMultiply
+   * @see preMultiply
+   * @param other Matrix
+   * @return Matrix
+   */
   operator fun times(other: Matrix): Matrix {
     val matrix = preMultiply(other)
     return matrix
   }
 
+  /**
+   * Get the inverse matrix of the current matrix
+   * @return Matrix
+   */
   fun invert(): Matrix {
     if (row != column) {
       throw IllegalArgumentException("Row is not equal to column , Matrix inversion not possible")
@@ -117,6 +165,10 @@ class Matrix(private val row: Int, private val column: Int) {
     return inverseMatrix
   }
 
+  /**
+   * calculate the determinant of the current matrix
+   * @return Double
+   */
   fun calculateDeterminant(): Double {
     if (row != column) {
       throw IllegalArgumentException("row is not equal to column , Matrix inversion not possible")
@@ -129,14 +181,22 @@ class Matrix(private val row: Int, private val column: Int) {
     }
     var determinant = 0.0
     for (i in 0..<row) {
-      val childMatrix = getChildMatrix(this, i, 0)
+      val childMatrix = getSubMatrix(this, i, 0)
       val childMatrixDeterminant = childMatrix.calculateDeterminant()
       determinant += this.values[i][0] * childMatrixDeterminant
     }
     return determinant
   }
 
-  private fun getChildMatrix(matrix: Matrix, excludedRow: Int, excludedColumn: Int): Matrix {
+  /**
+   * Get the sub-matrix excluding a certain row and column
+   * Mainly calculated using determinants
+   * @param matrix Matrix
+   * @param excludedRow Int
+   * @param excludedColumn Int
+   * @return Matrix
+   */
+  private fun getSubMatrix(matrix: Matrix, excludedRow: Int, excludedColumn: Int): Matrix {
     val childMatrix = Matrix(matrix.row - 1, matrix.column - 1)
     var childMatrixRowIndex = 0
     var childMatrixColumnIndex = 0
@@ -156,23 +216,27 @@ class Matrix(private val row: Int, private val column: Int) {
     return childMatrix
   }
 
+  /**
+   * Print the matrix values
+   * @return String
+   */
   override fun toString(): String {
     val sb = StringBuilder()
-    sb.append("[")
+    sb.append("{")
     for (i in 0..<row) {
-      sb.append("(")
+      sb.append("[")
       for (j in 0..<column) {
         sb.append(values[i][j])
         if (j != column - 1) {
           sb.append(", ")
         }
       }
-      sb.append(")")
+      sb.append("]")
       if (i != row - 1) {
         sb.append(",")
       }
     }
-    sb.append("]")
+    sb.append("}")
     return sb.toString()
   }
 }
