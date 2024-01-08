@@ -1,13 +1,17 @@
 package io.github.darkflamemasterdev
 
 /**
- *
+ * A matrix class
  * @property row Int
  * @property column Int
  * @property values Array<FloatArray>
  * @constructor
  */
 class Matrix(private val row: Int, private val column: Int) {
+
+  /**
+   * This is a matrix with a default value of 0, which is a zero matrix
+   */
   private var values = Array(row) { FloatArray(column) { 0f } }
 
   /**
