@@ -4,8 +4,6 @@ build/
 
 # Local configuration file (sdk path, etc)
 local.properties
-local.gradle
-MatrixKotlin/local.gradle
 
 # Log/OS Files
 *.log
@@ -33,9 +31,6 @@ google-services.json
 
 # Android Profiling
 *.hprof
-
-# Execute code
-src/main/kotlin/Main.kt
 
 # other files
 mavenCentral.gpg

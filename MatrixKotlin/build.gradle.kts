@@ -8,11 +8,13 @@ plugins {
 group = "io.github.darkflamemasterdev"
 version = "1.1.0"
 
+// see the link:https://vanniktech.github.io/gradle-maven-publish-plugin/central/
 mavenPublishing {
   publishToMavenCentral(SonatypeHost.S01)
 
   signAllPublications()
 
+  // groupId: artifactId: version cannot be wrong!!!
   coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1.0")
 
   pom {
@@ -41,6 +43,19 @@ mavenPublishing {
     }
   }
 }
+
+//add this to you ENV
+//# mavenCentral
+//export ORG_GRADLE_PROJECT_mavenCentralUsername=sonatypeUserName
+//export ORG_GRADLE_PROJECT_mavenCentralPassword=sonatypeUserPassword
+//
+//# see below for how to obtain this
+//export ORG_GRADLE_PROJECT_signingInMemoryKey=
+//
+//# Optional
+//export ORG_GRADLE_PROJECT_signingInMemoryKeyId=
+//# If key was created with a password.
+//export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=
 
 repositories {
   mavenCentral()
