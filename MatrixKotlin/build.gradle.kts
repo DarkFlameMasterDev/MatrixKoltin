@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.darkflamemasterdev"
-version = "1.1.0"
+version = "1.1.1"
 
 // see the link:https://vanniktech.github.io/gradle-maven-publish-plugin/central/
 mavenPublishing {
@@ -15,7 +15,7 @@ mavenPublishing {
   signAllPublications()
 
   // groupId: artifactId: version cannot be wrong!!!
-  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1.0")
+  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1.1")
 
   pom {
     name.set("MatrixKotlin")
