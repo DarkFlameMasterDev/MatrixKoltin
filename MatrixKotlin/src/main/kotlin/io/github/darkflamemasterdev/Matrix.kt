@@ -36,11 +36,13 @@ class Matrix(private val row: Int, private val column: Int) {
     if (column != matrix.row) {
       throw IllegalArgumentException("Matrix multiplication not possible")
     }
+
+    val sameSize = column
     val product = Matrix(row, matrix.column)
     val productValues = Array(row) { FloatArray(matrix.column) { 0f } }
     for (i in 0..<row) {
-      for (j in 0..<column) {
-        for (k in 0..<column) {
+      for (j in 0..<matrix.column) {
+        for (k in 0..<sameSize) {
           productValues[i][j] += this.values[i][k] * matrix.values[k][j]
         }
       }
@@ -52,25 +54,13 @@ class Matrix(private val row: Int, private val column: Int) {
   /**
    * Post multiply the {@param matrix}
    * 将当前矩阵放在右侧，也就是当前矩阵右乘 {@param matrix}
+   * @see preMultiply
    * @param matrix Matrix
    * The column of matrix should be same as the row of current matrix
    * @return Matrix
    */
   fun postMultiply(matrix: Matrix): Matrix {
-    if (row != matrix.column) {
-      throw IllegalArgumentException("Matrix multiplication not possible")
-    }
-    val product = Matrix(matrix.row, column)
-    val productValues = Array(matrix.row) { FloatArray(column) { 0f } }
-    for (i in 0..<matrix.row) {
-      for (j in 0..<matrix.column) {
-        for (k in 0..<matrix.column) {
-          productValues[i][k] += matrix.values[i][j] * values[j][k]
-        }
-      }
-    }
-    product.values = productValues
-    return product
+    return matrix.preMultiply(this)
   }
 
   /**
