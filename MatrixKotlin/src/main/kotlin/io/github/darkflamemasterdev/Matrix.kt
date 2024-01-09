@@ -1,13 +1,40 @@
 package io.github.darkflamemasterdev
 
 /**
- * A matrix class
+ *
  * @property row Int
  * @property column Int
  * @property values Array<FloatArray>
  * @constructor
  */
 class Matrix(private val row: Int, private val column: Int) {
+
+  /**
+   *
+   * @param array Array<FloatArray>
+   * @constructor
+   */
+  constructor(array: Array<FloatArray>) : this(array.size, array[0].size) {
+    setMatrixValue(array)
+  }
+
+  /**
+   *
+   * @param row Int
+   * @param column Int
+   * @param value FloatArray
+   * @constructor
+   */
+  constructor(row: Int, column: Int, vararg value: Float) : this(row, column) {
+    if (value.size != row * column) {
+      throw IllegalArgumentException("Matrix construct failed, values not match size(row * column)")
+    }
+    setMatrixValue(Array(row) { i ->
+      FloatArray(column) { j ->
+        value[i * column + j]
+      }
+    })
+  }
 
   /**
    * This is a matrix with a default value of 0, which is a zero matrix
@@ -20,7 +47,7 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   fun setMatrixValue(value: Array<FloatArray>) {
     if (value.size != row || value[0].size != column) {
-      throw IllegalArgumentException("Matrix size not match")
+      throw IllegalArgumentException("setMatrixValue failed, Matrix size not match")
     }
     this.values = value
   }
@@ -34,7 +61,7 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   fun preMultiply(matrix: Matrix): Matrix {
     if (column != matrix.row) {
-      throw IllegalArgumentException("Matrix multiplication not possible")
+      throw IllegalArgumentException("Column of matrix is not equal to row of current matrix, multiplication is not possible")
     }
 
     val sameSize = column
@@ -60,6 +87,9 @@ class Matrix(private val row: Int, private val column: Int) {
    * @return Matrix
    */
   fun postMultiply(matrix: Matrix): Matrix {
+    if (row != matrix.column) {
+      throw IllegalArgumentException("Column of matrix is not equal to row of current matrix, multiplication is not possible")
+    }
     return matrix.preMultiply(this)
   }
 
@@ -71,7 +101,7 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   operator fun plus(other: Matrix): Matrix {
     if (row != other.row || column != other.column) {
-      throw IllegalArgumentException("Matrix addition not possible")
+      throw IllegalArgumentException("Matrix size is not same, addition is not possible")
     }
     val sum = Matrix(row, column)
     for (i in 0..<row) {
@@ -90,7 +120,7 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   operator fun minus(other: Matrix): Matrix {
     if (row != other.row || column != other.column) {
-      throw IllegalArgumentException("Matrix subtraction not possible")
+      throw IllegalArgumentException("Matrix size is not same, subtraction not possible")
     }
     val difference = Matrix(row, column)
     for (i in 0..<row) {
@@ -119,10 +149,10 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   fun invert(): Matrix {
     if (row != column) {
-      throw IllegalArgumentException("Row is not equal to column , Matrix inversion not possible")
+      throw IllegalArgumentException("Row is not equal to column , Matrix inversion is not possible")
     }
     if (calculateDeterminant() == 0.0) {
-      throw IllegalArgumentException("Determinant is zero , Matrix inversion not possible")
+      throw IllegalArgumentException("Determinant is zero, Matrix inversion is not possible")
     }
     val augmentedMatrix = Matrix(row, column * 2)
     val augmentedMatrixValues = Array(row) { i ->
@@ -165,7 +195,7 @@ class Matrix(private val row: Int, private val column: Int) {
    */
   fun calculateDeterminant(): Double {
     if (row != column) {
-      throw IllegalArgumentException("row is not equal to column , Matrix inversion not possible")
+      throw IllegalArgumentException("row is not equal to column , Matrix inversion is not possible")
     }
     if (row == 1) {
       return this.values[0][0].toDouble()
