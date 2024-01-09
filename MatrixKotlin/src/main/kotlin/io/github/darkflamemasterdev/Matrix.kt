@@ -7,7 +7,7 @@ package io.github.darkflamemasterdev
  * @property values Array<FloatArray>
  * @constructor
  */
-class Matrix(private val row: Int, private val column: Int) {
+class Matrix(val row: Int, val column: Int) {
 
   /**
    *
@@ -37,9 +37,25 @@ class Matrix(private val row: Int, private val column: Int) {
   }
 
   /**
-   * This is a matrix with a default value of 0, which is a zero matrix
+   * An identity matrix
    */
-  private var values = Array(row) { FloatArray(column) { 0f } }
+  private val identityMatrixValues = Array(row) { i ->
+    FloatArray(column) { j ->
+      if (i == j) 1f else 0f
+    }
+  }
+
+  /**
+   * This is the default value of matrix, which made the matrix be an identity matrix
+   */
+  private var values = identityMatrixValues
+
+  /**
+   * reset the matrix to identity
+   */
+  fun reset() {
+    values = identityMatrixValues
+  }
 
   /**
    * Set the value of the matrix
@@ -220,7 +236,7 @@ class Matrix(private val row: Int, private val column: Int) {
    * @param excludedColumn Int
    * @return Matrix
    */
-  private fun getSubMatrix(matrix: Matrix, excludedRow: Int, excludedColumn: Int): Matrix {
+  fun getSubMatrix(matrix: Matrix, excludedRow: Int, excludedColumn: Int): Matrix {
     val childMatrix = Matrix(matrix.row - 1, matrix.column - 1)
     var childMatrixRowIndex = 0
     var childMatrixColumnIndex = 0
