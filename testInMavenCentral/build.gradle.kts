@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    implementation("io.github.darkflamemasterdev:MatrixKotlin:1.1T")
+    implementation("io.github.darkflamemasterdev:MatrixKotlin:1.1.0")
 }
 
 tasks.test {
