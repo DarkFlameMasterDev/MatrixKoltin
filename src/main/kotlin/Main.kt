@@ -1,8 +1,76 @@
 import io.github.darkflamemasterdev.Matrix
 
 fun main() {
-  testPreMultiply()
-  testPostMultiply()
+//  testPreMultiply()
+//  testPostMultiply()
+//  sdada()
+
+  testCanvasPostMultiply()
+//  asdasdasda()
+//  val vec3 = Matrix(3, 1, 1f, 1f, 1f)
+//  println(transformMatrix * vec3)
+}
+
+private fun asdasdasda() {
+  val matrix = Matrix(
+    3, 3,
+    1f, 0f, 0f,
+    0f, 0.70710677f, 0f,
+    0f, -0.0012276159f, 1f
+  )
+  val preTranslateMatrix = Matrix(
+    3, 3,
+    1f, 0f, -200f,
+    0f, 1f, -200f,
+    0f, 0f, 1f
+  )
+  val postTranslateMatrix = Matrix(
+    3, 3,
+    1f, 0f, 200f,
+    0f, 1f, 200f,
+    0f, 0f, 1f
+  )
+  val identityMatrix = Matrix(3, 3)
+  println("identityMatrix = $identityMatrix")
+  val transformMatrix1 = identityMatrix * preTranslateMatrix
+  println(transformMatrix1)
+  val transformMatrix2 = postTranslateMatrix * transformMatrix1
+  println(transformMatrix2)
+}
+
+private fun testCanvasPostMultiply() {
+  val a = Matrix(
+    3, 1,
+    1f,
+    1f,
+    1f
+  )
+  val matrixTranslate = Matrix(
+    3, 3,
+    1f, 0f, 7f,
+    0f, 1f, 8f,
+    0f, 0f, 1f
+  )
+
+  val matrixRotate = Matrix(
+    3, 3,
+    0.8660254f, -0.5f, 0f,
+    0.5f, 0.8660254f, 0f,
+    0f, 0f, 1f
+  )
+  val matrixScale = Matrix(
+    3, 3,
+    6f, 0f, 0f,
+    0f, 2f, 0f,
+    0f, 0f, 1f
+  )
+
+  println(matrixTranslate * a)
+  println(matrixRotate * matrixTranslate * a)
+  println(matrixScale * matrixRotate * matrixTranslate * a)
+}
+
+private fun sdada() {
   val a = Matrix(3, 3).apply {
     setMatrixValue(
       arrayOf(

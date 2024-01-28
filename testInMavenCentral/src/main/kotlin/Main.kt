@@ -1,6 +1,48 @@
 import io.github.darkflamemasterdev.Matrix
 
 fun main() {
+//  canvasMatrixTest()
+//  contactMatrixTest()
+  contactMatrixTest()
+}
+
+private fun contactMatrixTest() {
+  val matrix = Matrix(3, 3).apply {
+    setMatrixValue(
+      arrayOf(
+        floatArrayOf(42f, 37f, -1f),
+        floatArrayOf(51f, 73f, 20f),
+        floatArrayOf(75f, 55f, 8f)
+      )
+    )
+  }
+
+  val canvasMatrix = Matrix(3, 3).apply {
+    setMatrixValue(
+      arrayOf(
+        floatArrayOf(2f, 4f, 3f),
+        floatArrayOf(8f, 5f, 9f),
+        floatArrayOf(2f, 5f, 7f)
+      )
+    )
+  }
+
+  val cameraMatrix = Matrix(3, 3).apply {
+    setMatrixValue(
+      arrayOf(
+        floatArrayOf(-6f, 2f, 1f),
+        floatArrayOf(9f, 6f, -3f),
+        floatArrayOf(6f, 3f, 3f)
+      )
+    )
+  }
+
+  val x = canvasMatrix * cameraMatrix
+
+  println(x)
+}
+
+private fun canvasMatrixTest() {
   val a = Matrix(3, 3).apply {
     setMatrixValue(
       arrayOf(
@@ -31,6 +73,6 @@ fun main() {
     )
   }
 
-  println(a.invert().preMultiply(b))
-  println(a.preMultiply(x))
+  println(a.invert() * b)
+  println(a * x)
 }
