@@ -15,7 +15,7 @@ mavenPublishing {
   signAllPublications()
 
   // groupId: artifactId: version cannot be wrong!!!
-  coordinates("io.github.darkflamemasterdev", "MatrixKotlin", "1.1.2")
+  coordinates(group.toString(), "MatrixKotlin", version.toString())
 
   pom {
     name.set("MatrixKotlin")
