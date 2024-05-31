@@ -221,7 +221,7 @@ class Matrix(val row: Int, val column: Int) {
     }
     var determinant = 0.0
     for (i in 0..<row) {
-      val childMatrix = getSubMatrix(this, i, 0)
+      val childMatrix = getSubMatrix(i, 0)
       val childMatrixDeterminant = childMatrix.calculateDeterminant()
       determinant += this.values[i][0] * childMatrixDeterminant
     }
@@ -231,24 +231,23 @@ class Matrix(val row: Int, val column: Int) {
   /**
    * Get the sub-matrix excluding a certain row and column
    * Mainly calculated using determinants
-   * @param matrix Matrix
    * @param excludedRow Int
    * @param excludedColumn Int
    * @return Matrix
    */
-  fun getSubMatrix(matrix: Matrix, excludedRow: Int, excludedColumn: Int): Matrix {
-    val childMatrix = Matrix(matrix.row - 1, matrix.column - 1)
+  fun getSubMatrix(excludedRow: Int, excludedColumn: Int): Matrix {
+    val childMatrix = Matrix(this.row - 1, this.column - 1)
     var childMatrixRowIndex = 0
     var childMatrixColumnIndex = 0
-    for (i in 0..<matrix.row) {
+    for (i in 0..<this.row) {
       if (excludedRow == i) {
         continue
       }
-      for (j in 0..<matrix.column) {
+      for (j in 0..<this.column) {
         if (excludedColumn == j) {
           continue
         }
-        childMatrix.values[childMatrixRowIndex][childMatrixColumnIndex++] = matrix.values[i][j]
+        childMatrix.values[childMatrixRowIndex][childMatrixColumnIndex++] = this.values[i][j]
       }
       childMatrixColumnIndex = 0
       childMatrixRowIndex++
