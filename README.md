@@ -9,7 +9,7 @@ repositories {
 ```
 
 ```kotlin
-implementation("io.github.darkflamemasterdev:MatrixKotlin:1.1.2")
+implementation("io.github.darkflamemasterdev:MatrixKotlin:1.1.3")
 ```    
 
 ## usage

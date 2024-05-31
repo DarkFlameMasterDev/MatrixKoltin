@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.darkflamemasterdev"
-version = "1.1.2"
+version = "1.1.3"
 
 // see the link:https://vanniktech.github.io/gradle-maven-publish-plugin/central/
 mavenPublishing {
